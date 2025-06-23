@@ -1,64 +1,44 @@
-# A 3D Mathematical Model of a Dynamically Coupled Field
-
+A 3D Mathematical Model of a Dynamically Coupled Field
 This repository contains the simulation and analysis code for the paper:
-
-**Title:** A 3D Mathematical Model of a Dynamically Coupled Field Inspired by Operator Algebras: Theoretical Foundation and Numerical Verification of Stable Coupled Motion  
-**Author:** Toshiya Konno
-
-The final version of the preprint is available on Zenodo:  
-**DOI:** [Link to Zenodo DOI will be added here upon publication]
-
----
-
-## Abstract
-
+Title: A 3D Mathematical Model of a Dynamically Coupled Field Inspired by Operator Algebras: Theoretical Foundation and Numerical Verification of Stable Coupled Motion
+Author: Toshiya Konno
+The final version of the preprint is available on Zenodo:
+DOI: [Link to Zenodo DOI will be added here upon publication]
+Abstract
 We propose a three-dimensional mathematical model that dynamically couples a quantum field and a single-degree-of-freedom classical barrier, inspired by operator-algebraic ideas. The quantum part is governed by a non-linear Gross–Pitaevskii equation, whereas the barrier follows Newtonian dynamics with a Hellmann–Feynman feedback force and a tensegrity-like restoring force. Extensive split-step Fourier simulations show that, for an attractive interaction g<0 and an initial momentum within 0.1 < k_{z,kick} <= 0.15, a self-trapped quantum soliton travels together with the barrier in a stable coupled motion. The state is robust against parameter fluctuations and external noise, suggesting a loss-less information-transport mechanism that could be relevant to intracellular processes. We detail the theoretical framework, numerical verification, limitations, and future extensions.
+Reproducibility
+Important Note on Reproducibility
+The simulation data (.csv files) included in this repository were generated using the CPU version (simulation.py). This mode is designed to run on standard computers in a reasonable amount of time, allowing anyone to verify the code's functionality.
+However, due to the reduced grid resolution for faster computation, the dynamics captured in this mode (especially the barrier's motion in Fig. 2) are significantly less pronounced than those presented in the official publication.
+To reproduce the high-resolution figures published in the paper, it is necessary to run the simulation_gpu.py script on a CUDA-enabled GPU. This process is computationally intensive and may take a considerable amount of time. The resulting data will fully match the beautiful dynamics shown in the preprint.
+How to Reproduce
+1. Set up the Environment
+It is highly recommended to use a virtual environment. The required packages are listed in requirements.txt.
+# Clone the repository
+git clone https://github.com/k-toppi/CoupledField3D.git
+cd CoupledField3D
 
----
+# Create and activate a virtual environment
+python -m venv venv
+source venv/bin/activate  # On macOS/Linux
+# venv\Scripts\activate    # On Windows
 
-## Reproducibility
-
-### Computational Environment
-
-The simulations and analyses were performed on Google Colaboratory. To ensure reproducibility, the specific environment used to generate the figures in the paper is detailed below.
-
-- **Platform:** Google Colaboratory
-- **Python Version:** 3.11.13
-- **Key Libraries:**
-  - `numpy==2.0.2`
-  - `matplotlib==3.10.0`
-  - `pandas==2.2.2` (Note: Pandas was part of the standard environment but not actively used in the core simulation scripts.)
-
-A complete list of packages is available in the `requirements.txt` file.
-
-### How to Reproduce
-
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/k-toppi/CoupledField3D.git
-    cd CoupledField3D
-    ```
-
-2.  **Set up the Python environment:**
-    It is highly recommended to use a virtual environment to avoid conflicts with other projects.
-    ```bash
-    # Create a virtual environment
-    python3 -m venv venv
-    
-    # Activate it
-    source venv/bin/activate  # On macOS/Linux
-    # venv\Scripts\activate    # On Windows
-    
-    # Install the required packages
-    pip install -r requirements.txt
-    ```
-
-3.  **Run the scripts:**
-    - To reproduce the core simulation data: `python simulation.py`
-    - To generate the figures (Fig.1, Fig.2) from the paper: `python analysis.py`
-
----
-
-## License
-
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+# Install the required packages
+pip install -r requirements.txt
+2. Run the Simulation
+This repository provides two versions of the simulation script:
+For standard PCs (CPU only):
+Use simulation.py. This will be slower but will work on any machine.
+python simulation.py --mass 50 --output "M50_data.csv"
+python simulation.py --mass 25 --output "M25_data.csv"
+python simulation.py --mass 100 --output "M100_data.csv"
+For PCs with an NVIDIA GPU:
+Use simulation_gpu.py for much faster, high-resolution results. You will need to install cupy first: pip install cupy-cudaXXX (where XXX is your CUDA version).
+python simulation_gpu.py --mass 50 --output "M50_data_gpu.csv"
+# (and so on for other masses)
+3. Generate the Figures
+After generating the three data files (.csv) using either method, run the analysis script to create the figures.
+python analysis.py
+This will generate fig1.pdf and fig2.pdf in the current directory.
+License
+This project is licensed under the MIT License. See the LICENSE file for details.
