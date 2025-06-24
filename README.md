@@ -6,7 +6,7 @@ This repository contains the simulation and analysis code for the paper:
 **Author:** Toshiya Konno
 
 The final version of the preprint is available on Zenodo:  
-**DOI:** \[Link to Zenodo DOI will be added here upon publication\]
+**DOI:** \[10.5281/zenodo.15718574](https://doi.org/10.5281/zenodo.15718574)
 
 ---
 
