@@ -1,83 +1,59 @@
-# A 3D Mathematical Model of a Dynamically Coupled Field
+# A 3D Mathematical Model of a Dynamically Coupled Field Inspired by Operator Algebras (Version 3.0)
 
-This repository contains the simulation and analysis code for the paper:
-
-**Title:** A 3D Mathematical Model of a Dynamically Coupled Field Inspired by Operator Algebras: Theoretical Foundation and Numerical Verification of Stable Coupled Motion  
-**Author:** Toshiya Konno
-
-The final version of the preprint is available on Zenodo:  
-**DOI:** [10.5281/zenodo.15718574](https://doi.org/10.5281/zenodo.15718574)
+**Author:** Toshiya Konno  
+**Version:** 3.0 (July 14, 2025)  
+**DOI (Zenodo):** [To be added after publication]
 
 ---
 
 ## Abstract
 
-We propose a three-dimensional mathematical model that dynamically couples a quantum field and a single-degree-of-freedom classical barrier, inspired by operator-algebraic ideas. The quantum part is governed by a non-linear Gross–Pitaevskii equation, whereas the barrier follows Newtonian dynamics with a Hellmann–Feynman feedback force and a tensegrity-like restoring force. Extensive split-step Fourier simulations show that, for an attractive interaction g\<0 and an initial momentum within 0.1 \< k\_{z,kick} \<= 0.15, a self-trapped quantum soliton travels together with the barrier in a stable coupled motion. The state is robust against parameter fluctuations and external noise, suggesting a loss-less information-transport mechanism that could be relevant to intracellular processes. We detail the theoretical framework, numerical verification, limitations, and future extensions.
+We propose a three-dimensional mathematical model that dynamically couples a quantum field and a single-degree-of-freedom classical barrier, inspired by operator-algebraic ideas. The quantum part is governed by a non-linear Gross–Pitaevskii equation, whereas the barrier follows Newtonian dynamics with a Hellmann–Feynman feedback force and a tensegrity-like restoring force. Through numerical simulations, we observed and analyzed a *stable coupled motion*, where a self-trapped quantum soliton travels together with the barrier. Furthermore, to investigate its physical relevance, we introduce dissipation into the system. We demonstrate that this state exhibits remarkable robustness against strong dissipation and reveal a key new feature: a sharp, first-order-like phase transition at a critical damping threshold. This robust coupled state may provide a new theoretical framework for understanding loss-less information transport in complex environments such as intracellular processes.
 
 ---
 
-## Reproducibility
+## What's New in Version 3.0
 
-### Important Note on Reproducibility
+This version represents a significant advancement from v2.5 by investigating the model's behavior in a more realistic, dissipative environment. Key new findings include:
 
-The simulation data (`.csv` files) included in this repository were generated using the **CPU version** (`simulation.py`). This mode is designed to run on standard computers in a reasonable amount of time, allowing anyone to verify the code's functionality.
+- **Introduction of Dissipation:** A viscous drag term (`-γ * du/dt`) has been incorporated into the classical barrier's equation of motion to model environmental resistance.
+- **Exceptional Robustness:** The "stable coupled motion" is demonstrated to be extremely robust, persisting even under strong dissipation (`γ ≤ 1.90`). The quantum soliton and classical barrier remain perfectly synchronized.
+- **Discovery of a Phase Transition:** We identified a sharp, first-order-like phase transition at a critical damping threshold (`γ_c ≈ 1.9`). Beyond this point, the coupled motion abruptly ceases, indicating an "all-or-nothing" transport mechanism.
+- **High-Resolution Validation:** The results were validated with a higher-precision time step (`dt=0.0005`), confirming that the observed phenomena are intrinsic features of the physical system, not numerical artifacts.
 
-However, due to the reduced grid resolution for faster computation, the dynamics captured in this mode (especially the barrier's motion in Fig. 2\) are significantly less pronounced than those presented in the official publication.
+---
 
-**To reproduce the high-resolution figures published in the paper, it is necessary to run the `simulation_gpu.py` script on a CUDA-enabled GPU.** This process is computationally intensive and may take a considerable amount of time. The resulting data will fully match the beautiful dynamics shown in the preprint.
+## Repository Structure
 
-### How to Reproduce
+This repository contains all the necessary files to reproduce the findings of this study.
 
-#### 1\. Set up the Environment
+- `Konno_Toshiya_CoupledField3D_v3.0.pdf`: The main manuscript for Version 3.0.
+- `CoupledField3D_v3.0.tex`: The complete LaTeX source file for the manuscript.
+- `simulation_and_figure_generation_v3.0.ipynb`: The Jupyter Notebook (for Google Colab) used to run the simulations and generate the figures presented in the paper.
+- `/figures/`: This directory contains the figures used in the manuscript.
+  - `fig1_conservation.pdf`
+  - `fig2_mass_effect.pdf`
+  - `fig3_dissipation.pdf`
 
-It is highly recommended to use a virtual environment. The required packages are listed in `requirements.txt`.
+---
 
-\# Clone the repository
+## How to Reproduce
 
-git clone https://github.com/k-toppi/CoupledField3D.git
+The simulation results can be reproduced using the provided Jupyter Notebook.
 
-cd CoupledField3D
+1.  Open Google Colab: [https://colab.research.google.com/](https://colab.research.google.com/)
+2.  Go to `File` > `Upload notebook...` and select `simulation_and_figure_generation_v3.0.ipynb`.
+3.  Ensure the runtime is set to use a GPU accelerator (`Runtime` > `Change runtime type` > `GPU`).
+4.  Run the cells in the notebook. The simulation will execute, and the final figure (`fig3_dissipation.pdf`) will be generated and automatically downloaded to your local machine.
 
-\# Create and activate a virtual environment
+---
 
-python \-m venv venv
+## Citation
 
-source venv/bin/activate  \# On macOS/Linux
-
-\# venv\\Scripts\\activate    \# On Windows
-
-\# Install the required packages
-
-pip install \-r requirements.txt
-
-#### 2\. Run the Simulation
-
-This repository provides two versions of the simulation script:
-
-- **For standard PCs (CPU only):** Use `simulation.py`. This will be slower but will work on any machine.  
-    
-  python simulation.py \--mass 50 \--output "M50\_data.csv"  
-    
-  python simulation.py \--mass 25 \--output "M25\_data.csv"  
-    
-  python simulation.py \--mass 100 \--output "M100\_data.csv"  
-    
-- **For PCs with an NVIDIA GPU:** Use `simulation_gpu.py` for much faster, high-resolution results. You will need to install `cupy` first: `pip install cupy-cudaXXX` (where `XXX` is your CUDA version).  
-    
-  python simulation\_gpu.py \--mass 50 \--output "M50\_data\_gpu.csv"  
-    
-  \# (and so on for other masses)
-
-#### 3\. Generate the Figures
-
-After generating the three data files (`.csv`) using either method, run the analysis script to create the figures.
-
-python analysis.py
-
-This will generate `fig1.pdf` and `fig2.pdf` in the current directory.
+If you use this work, please cite it using the DOI provided at the top of this file (to be added upon publication on Zenodo).
 
 ---
 
 ## License
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+This project is licensed under the **MIT License**. See the `LICENSE` file for details.
