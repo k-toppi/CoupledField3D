@@ -1,14 +1,14 @@
 # A 3D Mathematical Model of a Dynamically Coupled Field Inspired by Operator Algebras (Version 3.0)
 
 **Author:** Toshiya Konno  
-**Version:** 3.0 (July 14, 2025)  
-**DOI (Zenodo):** [To be added after publication]
+**Version:** 3.0 (July 16, 2025)  
+**DOI (Zenodo):** [10.5281/zenodo.15964003](https://doi.org/10.5281/zenodo.15964003)
 
 ---
 
 ## Abstract
 
-We propose a three-dimensional mathematical model that dynamically couples a quantum field and a single-degree-of-freedom classical barrier, inspired by operator-algebraic ideas. The quantum part is governed by a non-linear Gross–Pitaevskii equation, whereas the barrier follows Newtonian dynamics with a Hellmann–Feynman feedback force and a tensegrity-like restoring force. Through numerical simulations, we observed and analyzed a *stable coupled motion*, where a self-trapped quantum soliton travels together with the barrier. Furthermore, to investigate its physical relevance, we introduce dissipation into the system. We demonstrate that this state exhibits remarkable robustness against strong dissipation and reveal a key new feature: a sharp, first-order-like phase transition at a critical damping threshold. This robust coupled state may provide a new theoretical framework for understanding loss-less information transport in complex environments such as intracellular processes.
+We propose a three-dimensional mathematical model that dynamically couples a quantum field and a single-degree-of-freedom classical barrier, inspired by operator-algebraic ideas. The quantum part is governed by a non-linear Gross–Pitaevskii equation, whereas the barrier follows Newtonian dynamics with a Hellmann–Feynman feedback force and a tensegrity-like restoring force. Through numerical simulations, we observed and analyzed a stable coupled motion, where a self-trapped quantum soliton travels together with the barrier. Furthermore, to investigate its physical relevance, we introduce dissipation into the system. We demonstrate that this state exhibits remarkable robustness against strong dissipation and reveal a key new feature: a sharp, first-order-like phase transition at a critical damping threshold. This robust coupled state may provide a new theoretical framework for understanding loss-less information transport in complex environments such as intracellular processes.
 
 ---
 
@@ -17,9 +17,9 @@ We propose a three-dimensional mathematical model that dynamically couples a qua
 This version represents a significant advancement from v2.5 by investigating the model's behavior in a more realistic, dissipative environment. Key new findings include:
 
 - **Introduction of Dissipation:** A viscous drag term (`-γ * du/dt`) has been incorporated into the classical barrier's equation of motion to model environmental resistance.
-- **Exceptional Robustness:** The "stable coupled motion" is demonstrated to be extremely robust, persisting even under strong dissipation (`γ ≤ 1.90`). The quantum soliton and classical barrier remain perfectly synchronized.
-- **Discovery of a Phase Transition:** We identified a sharp, first-order-like phase transition at a critical damping threshold (`γ_c ≈ 1.9`). Beyond this point, the coupled motion abruptly ceases, indicating an "all-or-nothing" transport mechanism.
-- **High-Resolution Validation:** The results were validated with a higher-precision time step (`dt=0.0005`), confirming that the observed phenomena are intrinsic features of the physical system, not numerical artifacts.
+- **Exceptional Robustness:** The "stable coupled motion" is demonstrated to be extremely robust, persisting even under strong dissipation (`γ ≤ 1.90`).
+- **Discovery of a Phase Transition:** We identified a sharp, first-order-like phase transition at a critical damping threshold (`γ_c ≈ 1.9`).
+- **High-Resolution Validation:** The results were validated with a higher-precision time step, confirming the phenomena are intrinsic features of the physical system, not numerical artifacts.
 
 ---
 
@@ -50,7 +50,7 @@ The simulation results can be reproduced using the provided Jupyter Notebook.
 
 ## Citation
 
-If you use this work, please cite it using the DOI provided at the top of this file (to be added upon publication on Zenodo).
+If you use this work, please cite it using the DOI provided at the top of this file.
 
 ---
 
