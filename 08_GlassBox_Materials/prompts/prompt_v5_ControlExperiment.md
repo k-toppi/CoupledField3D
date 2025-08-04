@@ -7,7 +7,7 @@
 *   **Tool:** Google Colab
 *   **Language:** Python 3.11
 *   **Key Libraries:** Numpy 1.26, Matplotlib 3.8, Pandas 2.1
-*   **Repository Commit:** `a1b2c3d` *(Note: Replace with the actual 7-digit commit hash from this repo at the time of execution before final publication.)*
+*   **Repository Commit:** a102868
 
 ---
 
