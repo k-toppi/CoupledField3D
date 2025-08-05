@@ -164,6 +164,8 @@ $T$ & Thermal strength (temperature) & 0.0 -- 3.0 (swept) \\
 
 \FloatBarrier
 \appendix
+\renewcommand{\thefigure}{A\arabic{figure}}
+\setcounter{figure}{0}
 
 \section{補遺 (Supplementary Information)}
 
@@ -182,7 +184,7 @@ $T$ & Thermal strength (temperature) & 0.0 -- 3.0 (swept) \\
 シミュレーションで用いた主要な数値計算パラメータは以下の通りである：時間刻み $\Delta t = 0.005$、計算格子サイズ $N_x=N_y=64, N_z=256$。
 
 \subsection{理論的導出の詳細 (Details of Theoretical Derivation)}
-本文中のセクション5.3で導入された、相転移の臨界条件を決定する、有効ポテンシャルの曲率 $\kappa_{eff}$ の導出について、その詳細をここに記す。
+本文中で議論した、相転移の臨界条件を決定する、有効ポテンシャルの曲率 $\kappa_{eff}$ の導出について、その詳細をここに記す。
 
 我々の理論の出発点は、平衡点 $u_{eq}$ の周りでの、微小な揺らぎ $\delta u(t)$ が従う、以下の線形化された運動方程式である。
 \begin{equation}
@@ -218,8 +220,16 @@ $T$ & Thermal strength (temperature) & 0.0 -- 3.0 (swept) \\
 本研究で用いた線形安定性解析は、相転移の臨界点を正確に予測するが、SRピークの高さやTEOSの振幅といった非線形現象を完全には記述できない。将来課題で述べた非線形効果の解析への第一歩として、有効ポテンシャル $V_{eff}(u)$ を $u_{eq}$ の周りでさらに高次までテイラー展開することが考えられる。$\delta u^3$ や $\delta u^4$ の項を考慮に入れることで、揺らぎの運動方程式はDuffing方程式の形に拡張され、より豊かなダイナミクスの解析への道が開かれるだろう。
 
 \subsection{補足データ}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\linewidth]{PhaseDiagram_v1_0.0-3.0_T_0.0-3.0.pdf}
+  \caption{散逸強度（$\gamma$）と熱的強度（$T$）をパラメータとする系の相図。数値シミュレーションにより決定された3つの相（安定結合移動、固定状態、TEOS）の分布を視覚的に示す。}
+  \label{fig:phase_diagram}
+\end{figure}
+
 \paragraph{強散逸領域におけるSNR}
-本文中の図3で示唆された「強すぎる散逸はSRを抑制する」という物理的知見をさらに補強するため、散逸係数が臨界値（$\gamma_c \approx 1.925$）を大きく超える $\gamma=2.5$ の条件下で、追加の数値シミュレーションを行った。その結果を図\ref{fig:strong_damping}に示す。予測通り、図2（$\gamma=1.5$）で観測された顕著なSNRピークは完全に消滅し、SNRは温度に対してほぼ平坦な振る舞いを示す。これは、強散逸領域では熱ゆらぎが系のダイナミクスにほとんど影響を与えられなくなり、SRのメカニズムが機能しなくなることを明確に示している。
+「強すぎる散逸はSRを抑制する」という物理的知見をさらに補強するため、散逸係数が臨界値（$\gamma_c \approx 1.925$）を大きく超える $\gamma=2.5$ の条件下で、追加の数値シミュレーションを行った。その結果を図\ref{fig:strong_damping}に示す。予測通り、以前の研究で$\gamma=1.5$の条件下で観測された顕著なSNRピークは完全に消滅し、SNRは温度に対してほぼ平坦な振る舞いを示す。これは、強散逸領域では熱ゆらぎが系のダイナミクスにほとんど影響を与えられなくなり、SRのメカニズムが機能しなくなることを明確に示している。
 
 \begin{figure}[h!]
   \centering
