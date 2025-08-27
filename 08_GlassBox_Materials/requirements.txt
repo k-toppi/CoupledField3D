@@ -1,9 +1,0 @@
-# ===================================================================
-# Required Python libraries for reproducing all results in the paper.
-# Install using: pip install -r requirements.txt
-# ===================================================================
-numpy
-pandas
-matplotlib
-scipy
-tqdm
