@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: "Konno"
+    given-names: "Toshiya"
+    orcid: "https://orcid.org/0009-0007-8916-3023"
+title: "A 3D Mathematical Model of a Dynamically Coupled Field Inspired by Operator Algebras: VII. Thermodynamically Consistent 3D Hybrid Model and Its Emergent Properties"
+version: 7.1
+doi: 10.5281/zenodo.17083406
+date-released: 2025-09-10
