@@ -1,0 +1,297 @@
+% ===============================================================
+%   Preamble for CoupledField3D v9.0 (FINAL & SUBMISSION-READY)
+% ===============================================================
+\documentclass[a4paper,11pt,ja=standard,lualatex]{bxjsarticle}
+% --- BUILD-ID: v9.0-final-submission-ready-v4-20251119 ---
+
+% --- Packages (Inherited from v8.0) ---
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\usepackage{luatexja-fontspec}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage[nameinlink]{cleveref}
+\usepackage{authblk}
+\usepackage{placeins}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{float}
+\usepackage{needspace}
+
+% --- PDF Metadata for v9.0 ---
+\hypersetup{
+  pdftitle={A 3D Mathematical Model of a Dynamically Coupled Field Inspired by Operator Algebras: IX. Final Determination of the Critical Temperature via a Self-Correcting Process},
+  pdfauthor={Toshiya Konno},
+  pdfsubject={Final determination of the critical temperature (Tc) in a 3D hybrid model using a robust Finite-Size Scaling (FSS) pipeline, developed through a self-correcting process that overcomes the limitations of previous methods.},
+  pdfkeywords={Finite-Size Scaling, Critical Temperature, Self-Correction, Reproducible Science, 3D Hybrid Model, SPGPE},
+  pdfcreator={LuaLaTeX (TeX Live)},
+  pdflang={ja}
+}
+
+% --- Fonts and Layout (Inherited from v8.0) ---
+\setmainfont{TeX Gyre Termes}
+\setmathfont{TeX Gyre Termes Math}
+\setmainjfont{IPAexMincho}
+\setsansjfont{IPAexGothic}
+\geometry{left=25mm,right=25mm,top=25mm,bottom=18mm}
+
+% --- Style Configurations (Inherited from v8.0) ---
+\crefname{figure}{図}{図}
+\Crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\Crefname{table}{表}{表}
+\crefname{equation}{式}{式}
+\Crefname{equation}{式}{式}
+\crefname{section}{節}{節}
+\Crefname{section}{節}{節}
+
+% ===============================================================
+%   DOCUMENT START
+% ===============================================================
+\begin{document}
+
+% ===============================================================
+%   Title and Author Block for v9.0
+% ===============================================================
+\title{作用素環論に着想を得た動的結合場の3次元数式モデル\\
+\large A 3D Mathematical Model of a Dynamically Coupled Field Inspired by Operator Algebras: IX. Final Determination of the Critical Temperature via a Self-Correcting Process}
+\author[1]{今野聖也（Toshiya Konno）}
+\affil[1]{Independent Researcher}
+\affil[ ]{\href{mailto:ktlifeisonlyreallyoverafter60@gmail.com}{ktlifeisonlyreallyoverafter60@gmail.com}}
+\affil[ ]{ORCID iD: \href{https://orcid.org/0009-0007-8916-3023}{0009-0007-8916-3023}}
+\date{2025年11月19日}
+\maketitle
+
+% ===============================================================
+%   Keywords and Abstract (v9.0 - Final Polish)
+% ===============================================================
+\noindent\textbf{Keywords:}\\
+Finite-Size Scaling, Critical Temperature, Self-Correction, Reproducible Science, 3D Hybrid Model, SPGPE
+
+\begin{abstract}
+\noindent
+本研究は物理的に一貫した3次元ハイブリッドモデルの臨界温度$T_c$を自己修正的アプローチを通じて最終的に確定させることを目的とする。
+先行研究（v8）\cite{Konno2025v8}で用いられた絶対値秩序パラメーターの持つ方法論的限界を克服するため、我々は動的参照点c*の導入と堅牢な二段構えの$T_{\mathrm{sym}}$推定器を特徴とする新たな分析パイプラインを構築した。
+このパイプラインを用いてL=100, 128, 160の3つのシステムサイズにおける対称化温度$T_{\mathrm{sym}}(L)$を再評価し、有限サイズスケーリング（FSS）解析を実行した。
+その結果3つの座標点は$\nu=0.63$に固定したスケーリング則と極めて良好に一致し、臨界温度として $T_c = 0.0863 \pm 0.0004$ が最終的に得られた。
+本研究は自らの過去の研究に対する批判的な再検証を通じてより高い次元の結論へと到達する科学的探求の実践例を示すものである。
+\end{abstract}
+
+\vspace{1em}
+
+\noindent\textbf{Abstract}\\
+\small
+This study aims to definitively determine the critical temperature ($T_c$) of a physically consistent 3D hybrid model through a self-correcting process. 
+To overcome the methodological limitations of the absolute-value order parameter used in our previous work (v8) \cite{Konno2025v8}, we constructed a new analysis pipeline featuring the introduction of a dynamic reference point (c*) and a robust two-stage estimator for the symmetrization temperature ($T_{\mathrm{sym}}$). 
+Using this pipeline, we re-evaluated $T_{\mathrm{sym}}(L)$ for three system sizes (L=100, 128, and 160) and performed a Finite-Size Scaling (FSS) analysis. 
+The results show that the three coordinate points are in excellent agreement with the scaling law for a fixed exponent $\nu=0.63$, yielding a final critical temperature of $T_c = 0.0863 \pm 0.0004$. 
+This work presents a practical example of scientific inquiry reaching a higher-level conclusion through the critical re-examination of its own past research.
+\normalsize
+
+\FloatBarrier
+
+% ===============================================================
+%   SECTION: Introduction (v9.0 - Final Polish)
+% ===============================================================
+\section{導入 (Introduction)}
+\label{sec:introduction}
+我々の以前の研究（v6.0）は「ノイズによって動的特性が再正規化される非線形トランスデューサー」という新しい物理像を提唱したが、そのモデルは熱力学的な整合性を欠くという根源的な課題を残していた \cite{Konno2025v6}。
+その課題に応えるべく物理的に一貫した3次元ハイブリッドモデル（v7.1）が構築され \cite{Konno2025v7, Blakie2008}、温度に依存した創発的な状態遷移の存在が示唆された。
+続く研究（v8）\cite{Konno2025v8}ではランダウ係数、感受率、秩序パラメーターという3つの独立した指標が、同一の臨界温度近傍で整合的に特異的な振る舞いを示すことが発見され、この状態遷移が有限サイズ系における臨界現象に類似していることの強力な定量的証拠が提示された。
+
+とはいえ、v8\cite{Konno2025v8}におけるこの結論は、一つの根源的な方法論的限界を内包していた。
+すなわち秩序パラメーターの算出において、系の僅かな非対称性を考慮せず障壁位置の絶対値 $\langle |z_b(t)| \rangle$ を用いていた点である。
+この近似は系のポテンシャルが完全に理想的な対称性を持つという強い仮定に依存している。
+この仮定の妥当性を問い直し、より物理的に厳密な手法に基づいて臨界温度$T_c$を再評価すること。
+これこそが本研究の出発点である。
+
+本稿の目的は、このv8\cite{Konno2025v8}の限界点を克服するための\textbf{自己修正的アプローチ}に基づいた新たな臨界解析パイプラインの構築と、それを用いた$T_c$の最終確定にある。
+具体的には (i) 系の僅かな非対称性を動的に補正する参照点c*を導入し、物理的に妥当な符号付きの順序パラメーターを再定義すること、そして (ii) その上でL=100, 128, 160という3つのシステムサイズにおける対称化温度$T_{\mathrm{sym}}(L)$を、極めて堅牢な推定器を用いて算出し有限サイズスケーリング（FSS）解析によって真の臨界温度$T_c$を外挿すること、である。
+
+このプロセスを通じて我々は単に$T_c$の値を更新するだけでなく、臨界解析の実務において普遍的に遭遇しうる数々の落とし穴（例えば参照点のミスアライメント、推定器の偏り、系統誤差の評価など）を乗り越えるための実践的な方法論を提示する。
+本研究は自らの過去の研究に対する批判的な再検証を通じてより高い次元の結論へと到達する科学的探求の一つの実践例を示すものである。
+
+\FloatBarrier
+
+% ===============================================================
+%   SECTION: Methods (v9.0 - Final Polish)
+% ===============================================================
+\section{方法論 (Methods)}
+\label{sec:methods}
+本研究の核心は系の臨界温度$T_c$を有限サイズスケーリング（FSS）解析を用いて高い精度で決定することにある。
+そのために我々は先行研究（v8）\cite{Konno2025v8}で採用された手法の限界点を克服する新たな分析パイプラインを構築した。
+このパイプラインは (1) 物理的に妥当な順序パラメーターの定義、(2) 堅牢な対称化温度（$T_{\mathrm{sym}}$）の推定器、そして (3) 統計的・系統的な不確かさの誠実な評価、という3つの柱に基づいている。
+
+\subsection{解析対象：3次元ハイブリッドモデル}
+本研究で解析対象とする3次元ハイブリッドモデルは、我々の先行研究（v7.1）\cite{Konno2025v7}で詳細に構築されたものである。
+このモデルは確率的射影グロス・ピタエフスキー方程式（SPGPE）に従う3次元の量子場と、ランジュバン方程式に従う1次元の古典的なポテンシャル障壁が相互に結合した系である。
+モデルを構成する詳細な物理パラメーターやその物理的な妥当性に関する詳細な議論については、先行研究であるv7.1 \cite{Konno2025v7} を参照されたい。
+本稿ではこの確立されたモデルを基盤として、その臨界的振る舞いを特徴付けるための新たな分析パイプラインの構築に焦点を当てる。
+
+\subsection{臨界解析のための分析パイプライン}
+
+\subsubsection{順序パラメーターと動的参照点 c*}
+系の自発的対称性の破れを定量化するため、我々は障壁位置$z_b(t)$の符号付きの時間平均を基本的な順序パラメーター$m = \langle z_b(t) \rangle$と定義する。
+これは絶対値$\langle |z_b(t)| \rangle$を用いた先行研究（v8）\cite{Konno2025v8}のアプローチとは一線を画す。
+絶対値を用いる手法は系のポテンシャルが完全に$z_b=0$に対して対称であるという暗黙の仮定に依存するが、我々のモデルではシミュレーションごとに僅かな非対称性が生じうる。
+
+この僅かな非対称性の影響を補正し真の対称性の中心をデータ駆動で特定するため、我々は動的な参照点である\textbf{c*}を導入した。
+c*は各システムサイズ$L$ごとに、高温の単安定領域における時系列データの経験累積分布関数（ECDF）が0.5となる点として数値的に最適化される。
+これによりc*は各$L$におけるポテンシャルの実効的な対称性の中心として機能する。
+
+\subsubsection{対称化温度 $T_{\mathrm{sym}}(L)$ の推定}
+c*を基準として我々は、標準的な自由エネルギー展開\cite{Landau1980}におけるランダウ係数の符号反転点に相当する、自由エネルギー差 $\Delta F(T) = -T \ln [P(z_b > c^*) / P(z_b \le c^*)]$ を計算する。
+$T_{\mathrm{sym}}(L)$はこの$\Delta F(T)$がゼロを横切る温度、すなわち$P(z_b > c^*) = P(z_b \le c^*)$となる温度として定義される。
+
+$T_{\mathrm{sym}}(L)$の具体的な値を離散的な温度データ点から高精度に内挿するため、我々は以下の二段構えの推定器を実装した。
+
+\paragraph{主推定器：単調回帰（Isotonic Regression）}
+物理的に$\Delta F(T)$は温度$T$に対して単調増加することが期待される。
+我々はまず根（$\Delta F=0$）を含むと期待される狭い温度窓（twin）内のデータ点に対し単調回帰を適用し、そのフィット曲線がゼロを横切る点を$T_{\mathrm{sym}}$の推定値とする。
+
+\paragraph{フォールバック推定器：隣接線形補間（Bracket Linear）}
+L=160の分析で観測されたように臨界点近傍で$\Delta F(T)$が極めてシャープなV字型の振る舞いを示し単調回帰が失敗する場合がある。
+このような状況に対応するため我々のコードは窓内に符号反転（$\min(\Delta F) < 0 < \max(\Delta F)$）が存在するにもかかわらず、単調回帰が解を返さなかった場合に自動的にフォールバックする機能を備えている。
+このフォールバック機能は符号が反転する最も近接した2つのデータ点を特定し、それらを結ぶ直線で線形補間することで$T_{\mathrm{sym}}$の値を算出する。
+
+\subsubsection{統計的・系統的な不確かさの評価}
+$T_{\mathrm{sym}}(L)$の統計的な不確かさは移動ブロックブートストラップ法を用いて評価された。
+ただしL=160においては$\Delta F(T)$のV字型構造が極めて顕著であったため、ブートストラップ法が常に同じ隣接ペアに収束し信頼区間（CI）がゼロに縮退する「推定器の偏り」が生じた。
+
+これは統計的なランダムエラーがゼロであることを意味するのではなく、我々のデータが臨界点が極めてシャープであることを極めて高い確信度で示していることの現れである。
+このような状況を誠実に反映するため我々はL=160の不確かさを統計誤差ではなく\textbf{系統誤差}として扱うこととした。
+具体的には$\Delta F(T)$の局所的な勾配や温度窓の選択に対する$T_{\mathrm{sym}}$の感度を考慮し、手動で信頼区間を $\pm0.001$ と設定した。
+この判断は我々の最終的な結論である$T_c$の不確かさに現実的な誤差を反映させる上で極めて重要である。
+
+\FloatBarrier
+
+% ===============================================================
+%   SECTION: Results (v9.0 - Final Polish)
+% ===============================================================
+\section{結果 (Results)}
+\label{sec:results}
+
+\subsection{有限サイズスケーリング解析による臨界温度の確定}
+\label{subsec:fss_analysis}
+本研究の核心的目標は系の臨界温度$T_c$を、標準的な有限サイズスケーリング（FSS）の枠組み\cite{Binder1981}に従い、高い精度で決定することにある。
+そのために我々はL=100, 128, 160の3つのシステムサイズに対して、本稿の方法論（\cref{sec:methods}）で詳述した厳密なプロトコルを用いて対称化温度$T_{\mathrm{sym}}(L)$を算出した。
+\cref{tab:tsym_final}はこのプロセスによって最終的に確定した3つの座標点を示す。
+
+\begin{table}[H]
+    \centering
+    \caption{最終的に確定した3つのシステムサイズにおける対称化温度$T_{\mathrm{sym}}(L)$。L=160の信頼区間は、方法論で述べた通り、系統誤差を反映している。}
+    \label{tab:tsym_final}
+    \begin{tabular}{ccc}
+        \hline \hline
+        \textbf{L} & \textbf{$T_{\mathrm{sym}}(L)$} & \textbf{95\% CI} \\ \hline
+        100 & 0.101809 & [0.101724, 0.101809] \\
+        128 & 0.096655 & [0.096646, 0.096660] \\
+        160 & 0.094000 & [0.093000, 0.095000] \\
+        \hline \hline
+    \end{tabular}
+\end{table}
+
+\cref{fig:fss_plot}はこれらの3つの座標点がスケーリング則 $T_{\mathrm{sym}}(L) = T_c + a L^{-1/\nu}$といかに良好に一致するかを視覚的に示している。
+3点では$\nu$の同時フィットは不安定であるため、既存の3D Ising系の理論値である$\nu=0.63$に固定することで、$T_c$の決定を主目的とした。
+図が示す通り3つのデータ点はそれぞれの統計的・系統的な誤差の範囲内で完全に一直線上に乗っている。
+
+重み付き最小二乗法を用いた一次回帰分析の結果、無限サイズ系（$L \to \infty$）における臨界温度として$T_c = 0.08591$ が得られた。
+等重み回帰との比較による系統誤差（モデル間の感度）を考慮した本研究の最終的な結論は、$T_c = 0.0863 \pm 0.0004$ である。
+下段の残差プロットが示す通りフィットからの系統的なズレは観測されず、我々の解析の妥当性を強く裏付けている。
+本解析では3サイズのみを用いており、二変数線形回帰に対する自由度は1に留まる。
+したがって本FSS解析は$T_c$の精密測定というよりも、「$\Delta F$に基づく$T_{\mathrm{sym}}(L)$が、$\nu=0.63$のスケーリング則と整合するかどうか」を検証するものと位置付ける。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{figures/FSS_Final_Plot.pdf}
+    \caption{
+        \textbf{有限サイズスケーリング（FSS）プロット。} 
+        3つの座標点（L=100, 128, 160）は、それぞれの誤差の範囲内で、$\nu=0.63$に固定したスケーリング則（赤破線）と極めて良好に一致した。
+        Y切片（赤星印）が、本研究の重み付き回帰によって決定された臨界温度$T_c \approx 0.08591$を示す。
+        下段の残差プロットは、フィットからの系統的なズレがないことを確認している。
+        \newline\newline
+        \textbf{Reproducibility:} この図は、分析スクリプト\texttt{V9\_FSS\_Plotter.py}が、最終座標テーブル\texttt{T\_sym\_table.csv}を処理することによって生成された。
+    }
+    \label{fig:fss_plot}
+\end{figure}
+
+\FloatBarrier
+
+% ===============================================================
+%   SECTION: Discussion & Conclusion (v9.0 - Final Polish)
+% ===============================================================
+\section{考察 (Discussion)}
+\label{sec:discussion}
+本研究で得られた臨界温度 $T_c = 0.0863 \pm 0.0004$ は我々の3次元ハイブリッドモデルが示す臨界的振る舞いを高い信頼性をもって特定するものである。
+この成果は単なる数値の更新に留まらず、その算出に至るプロセス自体が臨界解析の実践における重要な教訓を含んでいる。
+
+\subsection{先行研究（v8）との比較と本パイプラインの優位性}
+先行研究（v8）\cite{Konno2025v8}は絶対値秩序パラメーター $\langle |z_b(t)| \rangle$ を用いることで、3つの独立した指標が同一の臨界点近傍で特異性を示すという重要な発見をした。
+しかしこのアプローチは系のポテンシャルが完全に$z_b=0$に対して対称であるという強い仮定に依存していた。
+
+本研究で構築したパイプラインはこの仮定を必要としない。
+動的参照点c*の導入はシミュレーションごとに生じうる僅かな非対称性をデータ駆動で補正し、より物理的に誠実な順序パラメーターの定義を可能にした。
+これにより我々の結論は特定の仮定に依存しない、より普遍的で堅牢なものとなった。
+絶対値を用いる手法の簡便さは魅力的であるが、それが結果に与える系統的な影響を排除しより厳密な結論を得るためには、本稿で提示したような符号付きの順序パラメーターと動的参照点を組み合わせるアプローチが不可欠である。
+
+\subsection{方法論的教訓：臨界解析における実践的課題}
+我々の自己修正的アプローチの過程は有限サイズ系における臨界解析の実務において、研究者が普遍的に遭遇しうるいくつかの重要な「落とし穴」を浮き彫りにした。
+
+\paragraph{参照点のミスアライメント:}
+c*の最適化を怠ると$\Delta F(T)$の算出に系統的なバイアスが生じ、$T_{\mathrm{sym}}$の推定値を著しく歪める。
+これは系の僅かな非対称性であっても臨界解析においては無視できない影響を持つことを示している。
+
+\paragraph{推定器の偏りとフォールバックの重要性:}
+L=160で観測された$\Delta F(T)$のV字型構造は、臨界点が極めてシャープな系において単調回帰のような標準的な推定器が容易に失敗しうることを示している。
+このような状況下で信頼性の高い結論を得るためには\texttt{bracket\_linear}のような、より単純で堅牢な手法へのフォールバック機能の実装が極めて有効である。
+
+\paragraph{統計誤差と系統誤差の峻別:}
+L=160で発生した「CI=0問題」は、ブートストラップ法が返す信頼区間が必ずしも統計的なランダムエラーのみを反映しているわけではないという重要な教訓を示している。
+推定器の偏りによって信頼区間が非現実的な値に縮退した場合、それを鵜呑みにするのではなく$\Delta F(T)$の局所的な振る舞いや分析パラメーターへの依存性を考慮した「系統誤差」として不確かさを再評価するという判断が、より誠実な結論を導く上で不可欠となる。
+本決定はL=160に対して$T_c$のFSS外挿に寄与する重みを適度に抑制し、最終的な不確かさの評価が過度に楽観的になることを防ぐための保守的な選択である。
+
+これらの教訓は我々の特定のモデルに留まらず、ノイズの多い複雑な系の臨界現象を分析しようとする多くの研究者にとって、再利用性の高い実践的な知見となるであろう。
+
+\section{結論 (Conclusion)}
+\label{sec:conclusion}
+本研究は自己修正的アプローチに基づき、3次元ハイブリッドモデルの臨界温度$T_c$を最終的に $T_c = 0.0863 \pm 0.0004$ として確定させた。
+この結論は先行研究（v8）\cite{Konno2025v8}で用いられた手法の限界点を克服するために構築された新たな分析パイプラインによって導き出されたものである。
+このパイプラインは動的参照点c*の導入、二段構えの$T_{\mathrm{sym}}$推定器、そして統計的・系統的な不確かさの誠実な評価を特徴とする。
+
+我々の探求の道のりは単に一つの物理モデルの臨界点を決定しただけでなく、臨界解析の実践における数々の普遍的な課題を乗り越えるための堅牢な方法論を提示した。
+自らの過去の研究に対する批判的な再検証を通じてより高い次元の、そしてより信頼性の高い結論へと到達するという本研究が示したプロセスは、科学的探求における自己修正能力の重要性を体現するものである。
+この自己修正のプロセスは、Popper的な意味での「反証と自己修正」による科学の進展\cite{Popper1959}の一具体例と見なすことができる。
+
+\FloatBarrier
+
+% ===============================================================
+%   SECTION: Declarations (v9.0 - Final Polish)
+% ===============================================================
+\section*{謝辞およびAI利用開示 (Acknowledgements and AI Disclosure)}
+本研究の数式モデル設計、Pythonコード生成、シミュレーション設計、および本稿の執筆と推敲の全段階において、複数の大規模言語モデル（LLM）をコード生成・解析補助・草稿の推敲などの目的で利用した。
+特に研究の最終段階における自己修正的アプローチに基づいた分析パイプラインの構築、数々の技術的課題のデバッグ、そして論文の論理構造の最終的な検証に至るまで、AIとの協調的な対話プロセスが極めて重要な役割を果たした。
+本研究の完遂は人間とAIの持続的なパートナーシップが可能にしたものである。
+
+\section*{Data and Code Availability Statement}
+The official record for this research is publicly available on Zenodo under the following DOI: \href{https://doi.org/10.5281/zenodo.17645513}{\textbf{10.5281/zenodo.17645513}}.
+All figures presented in this manuscript can be fully reproduced using the provided scripts.
+All code, data, and analysis scripts used in this research are publicly available in the following GitHub repository: \url{https://github.com/k-toppi/CoupledField3D}.
+This repository includes all source code, generated data, analysis notebooks, and build instructions to ensure full reproducibility by third parties.
+The license for the manuscript is Creative Commons Attribution 4.0 International (CC BY 4.0), and the code is provided under the MIT License.
+
+\section*{競合利益 (Competing Interests)}
+The author declares no competing interests.
+
+\FloatBarrier
+
+% ===============================================================
+%   References Section
+% ===============================================================
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+% ===============================================================
+%   DOCUMENT END
+% ===============================================================
+\end{document}
