@@ -83,3 +83,29 @@ Please see the `LICENSE` and `DATA_LICENSE` files for more details.
 ## Contact
 
 Toshiya Konno - ktlifeisonlyreallyoverafter60@gmail.com
+
+---
+
+## Latest manuscript: Part X
+
+**Title**  
+*A 3D Mathematical Model of a Dynamically Coupled Field Inspired by Operator Algebras: X. Effective-Temperature Mapping of ATP-Scale Energy Input and Ordered-Side Transport in a Hybrid Model*
+
+**Summary**  
+This part investigates how an ATP-based effective-temperature mapping may influence energy propagation under strong thermal noise within the 3D quantum-classical hybrid model developed in this project. Using the critical-temperature estimate obtained in Part IX as a reference, the manuscript introduces an effective temperature based on the in vivo free-energy scale of ATP hydrolysis and compares a low-noise ATP-scale regime with a high-noise reference regime.
+
+**Main points**
+- Introduces an ATP-scale effective-temperature mapping with $T_{\mathrm{eff}} \approx 0.0534$
+- Compares pulse propagation at $T=0.0534$ and $T=0.10$
+- Interprets the results within a finite-size $L=100$ setting
+- Explicitly distinguishes effective energy-scale mapping from a direct microscopic ATP-hydrolysis model
+- Includes limitations, finite-size caveats, and pre-crash-window interpretation
+
+**Reproducibility**
+The main figures in Part X were generated using:
+- `V10_Generate_Figures_1_and_2_v6.py`
+
+All scripts, data, and manuscript sources are included in this repository.
+
+**Zenodo archive**
+Official archived version: DOI: `10.5281/zenodo.18975719`
