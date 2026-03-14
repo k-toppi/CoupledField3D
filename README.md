@@ -108,4 +108,4 @@ The main figures in Part X were generated using:
 All scripts, data, and manuscript sources are included in this repository.
 
 **Zenodo archive**
-Official archived version: DOI: `10.5281/zenodo.18975719`
+Official archived version: DOI: [10.5281/zenodo.18975719](https://doi.org/10.5281/zenodo.18975719)
