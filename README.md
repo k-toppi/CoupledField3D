@@ -86,7 +86,7 @@ Toshiya Konno - ktlifeisonlyreallyoverafter60@gmail.com
 
 ---
 
-## Latest manuscript: Part X
+## Latest manuscript: Version 10.0 (v10.0)
 
 **Title**  
 *A 3D Mathematical Model of a Dynamically Coupled Field Inspired by Operator Algebras: X. Effective-Temperature Mapping of ATP-Scale Energy Input and Ordered-Side Transport in a Hybrid Model*
