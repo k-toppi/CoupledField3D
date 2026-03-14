@@ -1,0 +1,337 @@
+% !TEX program = lualatex
+% !TEX program = lualatex
+% 表記ルールメモ: 数字は原則として算用数字（例: 2つ, 3次元）を用いる。
+% 表記ルールメモ: 外来語は短い形に統一（例: パラメータ）。
+% 表記ルールメモ: かな化は必要最小限（例: 「わかる」は可、本文の学術語は原則漢字維持）。
+% 表記ルールメモ: 句読点は可読性優先。1文内の読点は過多を避け、必要なら句点で分割する。
+% ===============================================================
+%   Preamble for CoupledField3D v10.0 (FINAL & SUBMISSION-READY)
+% ===============================================================
+\documentclass[a4paper,11pt,ja=standard,lualatex]{bxjsarticle}
+% --- BUILD-ID: v10.0-final-submission-ready-v8-20260314 ---
+
+% --- Packages ---
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\usepackage{luatexja-fontspec}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage[nameinlink]{cleveref}
+\usepackage{authblk}
+\usepackage{placeins}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{float}
+\usepackage{needspace}
+\usepackage{silence}
+\WarningFilter{geometry}{Over-specification in}
+
+% --- PDF Metadata ---
+\hypersetup{
+  pdftitle={A 3D Mathematical Model of a Dynamically Coupled Field Inspired by Operator Algebras: X. Effective-Temperature Mapping of ATP-Scale Energy Input and Ordered-Side Transport in a Hybrid Model},
+  pdfauthor={Toshiya Konno},
+  pdfsubject={Investigation of ordered-side energy transport under thermal noise via effective-temperature mapping based on ATP-scale energy input within a 3D hybrid model.},
+  pdfkeywords={Effective Temperature Mapping, ATP-Scale Energy Input, Ordered Transport, Thermal Noise, 3D Hybrid Model, SPGPE},
+  pdfcreator={LuaLaTeX (TeX Live)},
+  pdflang={ja}
+}
+
+% --- Fonts and Layout ---
+\setmainfont{TeX Gyre Termes}
+\setmathfont{TeX Gyre Termes Math}
+\setmainjfont{IPAexMincho}
+\setsansjfont{IPAexGothic}
+\geometry{left=25mm,right=25mm,top=25mm,bottom=18mm}
+
+% --- Style Configurations ---
+\crefname{figure}{図}{図}
+\Crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\Crefname{table}{表}{表}
+\crefname{equation}{式}{式}
+\Crefname{equation}{式}{式}
+\crefname{section}{節}{節}
+\Crefname{section}{節}{節}
+
+% ===============================================================
+%   DOCUMENT START
+% ===============================================================
+\begin{document}
+
+% ===============================================================
+%   Title and Author Block
+% ===============================================================
+\title{作用素環論に着想を得た動的結合場の3次元数式モデル\\
+\large X. ATPスケールの有効温度写像が示唆する秩序側輸送：3次元ハイブリッドモデルにおける熱雑音との競合}
+\author[1]{今野聖也（Toshiya Konno）}
+\affil[1]{Independent Researcher}
+\affil[ ]{\href{mailto:ktlifeisonlyreallyoverafter60@gmail.com}{ktlifeisonlyreallyoverafter60@gmail.com}}
+\affil[ ]{ORCID iD: \href{https://orcid.org/0009-0007-8916-3023}{0009-0007-8916-3023}}
+\date{2026年3月14日}
+\maketitle
+
+% ===============================================================
+%   Keywords and Abstract
+% ===============================================================
+\noindent\textbf{Keywords:}\\
+Effective Temperature Mapping, ATP-Scale Energy Input, Ordered Transport, Thermal Noise, 3D Hybrid Model, SPGPE
+
+\begin{abstract}
+\noindent
+本研究は、3次元量子・古典ハイブリッドモデルを用いて、ATPエネルギースケールに基づく有効温度写像が、強い熱雑音下のエネルギー伝播にどのような影響を与えるかを検討することを目的とする。先行研究（Part IX）で得られた臨界温度推定値 $T_c \approx 0.0863$ を基盤として、我々はATPの加水分解自由エネルギー（in vivoで $\sim 0.5\,\mathrm{eV}$）を代表的な駆動エネルギースケールとして採用し、有効温度 $T_{\mathrm{eff}} \approx 0.0534$ を導入した。この値は本モデルの臨界温度推定値より低温側に位置し、ATPスケールのエネルギー供給を受ける自由度が、秩序側レジームに対応しうることを示唆する。
+
+比較シミュレーションでは、$T=0.0534$ の低雑音側条件と $T=0.10$ の高雑音参照条件における局所パルスの伝播を調べた。その結果、前者では背景雑音に対して比較的明瞭な局在波束の伝播が観測され、後者では信号の識別性が速やかに低下した。高雑音条件では数値的不安定化が生じたため、解釈は検証済みの停止前時間窓（pre-crash time window）に限定した。
+
+以上の結果は、本モデルの枠組みにおいて、ATPエネルギースケールに基づく有効的な低雑音化が、秩序だった輸送様ダイナミクスを支える可能性を示唆する。ただし本研究はATP加水分解の微視的反応過程を直接モデル化したものではなく、エネルギースケールの写像に基づく有効記述として理解されるべきである。
+\end{abstract}
+
+\vspace{1em}
+
+\noindent\textbf{Abstract}\\
+\small
+This study investigates, within a 3D quantum-classical hybrid model, how an ATP-based effective-temperature mapping may influence energy propagation under strong thermal noise. Building on the critical-temperature estimate $T_c \approx 0.0863$ obtained in Part IX, we introduce an effective temperature based on the free-energy scale of ATP hydrolysis in vivo ($\sim 0.5\,\mathrm{eV}$), yielding $T_{\mathrm{eff}} \approx 0.0534$. In the dimensionless control-parameter space of the model, this value lies on the low-temperature side of the estimated critical scale, suggesting that ATP-scale energy input may place certain collective degrees of freedom in an ordered-side regime.
+
+We then compare pulse propagation under two representative conditions: a low-noise case at $T=0.0534$ and a high-noise reference case at $T=0.10$. In the former, a localized wave packet remains comparatively distinguishable from the background during propagation, whereas in the latter the signal rapidly loses contrast against thermal noise. Because numerical instability develops in the high-noise case, the physical interpretation is restricted to the validated pre-crash time window.
+
+These results suggest that, within the framework of our effective model, ATP-scale energy input may support transport dynamics with greater robustness against thermal noise. However, the present work should be interpreted as an effective energy-scale mapping rather than a direct microscopic model of ATP hydrolysis.
+\normalsize
+
+\FloatBarrier
+
+% ===============================================================
+%   SECTION: Introduction
+% ===============================================================
+\section{導入 (Introduction)}
+\label{sec:introduction}
+生命システムは、約310Kという強い熱雑音環境にありながら、細胞内外において高い効率をもつエネルギー輸送と情報伝達を実現している。この事実は、熱平衡統計力学の素朴な直観から見ると一種の逆説を含んでいる。すなわち、この温度スケールでは微視的な秩序やコヒーレンスは容易に乱されると期待されるにもかかわらず、現実の生体はなお安定な機能を維持しているのである \cite{Lindner2004}。この「強い熱雑音下でいかに秩序だった輸送が可能か」という問いは、生物物理学における基本的課題の一つである。
+
+我々はこれまで、作用素環論に着想を得た量子・古典ハイブリッド場の数理モデルを用いて、この問題に段階的に取り組んできた \cite{Konno2025v7, Konno2025v8}。Part VIIでは、確率的射影グロス・ピタエフスキー方程式（SPGPE）に従う3次元量子場と、ランジュバン方程式に従う古典的障壁自由度を結合した、熱力学的に整合的な3次元ハイブリッドモデルを構築した \cite{Konno2025v7}。続くPart IXでは、動的参照点$c^*$を導入した自己修正的解析パイプラインを通じて、有限サイズスケーリング（FSS）に基づく臨界温度の推定を行い、本モデルに対して
+\begin{equation}
+T_c \approx 0.0863
+\end{equation}
+という作業仮説的な臨界スケールを得た \cite{Konno2025v9}。この結果は、本モデルが少なくとも有限サイズ系において、秩序側と高温側とを分ける明瞭なクロスオーバー構造を持つことを示唆している。
+
+しかしPart IXの結果にはなお一つの重要な課題が残されていた。それは、そこで得られた無次元臨界温度$T_c$を、現実の生体におけるエネルギースケールとどのように対応づけるかという問題である。もし単純に熱エネルギー$k_B T_{\mathrm{phys}}$のみを基準にすれば、体温310Kは本モデルの秩序形成にとって過酷な高雑音条件に見える。しかし生体は熱平衡系ではなく、ATPのような非平衡的エネルギー供給を絶えず受けている。したがって、生体機能に関わる特定の集団自由度については、単なる浴温だけではなく、供給される駆動エネルギースケールとの比で有効的なノイズ強度を評価する視点が有用である可能性がある。
+
+本稿（Part X）では、この観点からATPに着目する。ATPの加水分解自由エネルギーは、生体内条件ではおよそ$0.5\,\mathrm{eV}$に達しうることが知られており \cite{Phillips2012, Milo2015}、これは体温に対応する熱エネルギー$\sim 0.027\,\mathrm{eV}$を大きく上回る。近年の推定で約37兆個とされる人体の細胞 \cite{Bianconi2013} が、この熱雑音の中で安定して機能できる理由も、この非平衡なエネルギー供給に求められるかもしれない。そこで本研究では、ATP加水分解そのものを微視的にシミュレートするのではなく、ATPが供給しうるエネルギースケールを、ハイブリッドモデルの無次元制御パラメータへ写像する粗視化的（coarse-grained）な有効記述を導入する。この写像により、ATPスケールに対応する有効温度
+\begin{equation}
+T_{\mathrm{eff}} = \frac{k_B T_{\mathrm{phys}}}{E_{\mathrm{ATP}}}
+\end{equation}
+を定義し、それがPart IXで推定された臨界スケールに対してどの位置に入るかを評価する。
+
+本研究の目的は2つある。第一に、ATPエネルギースケールに基づく有効温度写像が、本モデルの制御パラメータ空間において秩序側に対応しうるかを明らかにすることである。第二に、その写像に基づく低雑音側条件と、高雑音参照条件とで、局所的に注入したエネルギーパルスの伝播特性がどのように変化するかを比較することである。ここで扱う伝播シミュレーションは有限サイズ$L=100$の系に対して実施される。その結果は熱力学極限における厳密な相分類そのものではなく、有限系における低雑音側・高雑音側のダイナミクスの比較として解釈されるべきである。
+
+本稿の主張は、ATPが直接に生体内秩序輸送を「証明」するというものではない。むしろ、ATPスケールのエネルギー供給を受ける自由度が、本モデル内で秩序側に対応するレジームへ写像されうることを示す点にある。また、その条件下では高雑音参照条件に比べて、より識別可能な伝播構造が維持されうることを示す。この意味で本研究は、Part IXで確立した臨界スケールの知見を、生体エネルギー尺度との関係において再解釈し、熱雑音下の輸送現象を理解するための一つの有効的シナリオを提示するものである。
+
+\FloatBarrier
+
+% ===============================================================
+%   SECTION: Methods
+% ===============================================================
+\section{方法論 (Methods)}
+\label{sec:methods}
+
+\subsection{3次元ハイブリッドモデルと数値解法}
+本研究では、Part VIIおよびPart IXで構築・検証された3次元量子・古典ハイブリッドモデルを用いる \cite{Konno2025v7, Konno2025v9}。本モデルは、3次元空間上の確率的射影グロス・ピタエフスキー方程式（SPGPE）に従う量子場と、1次元の古典的障壁自由度に対するランジュバン方程式とを結合したものである。詳細な方程式系、結合形式、および物理的妥当性については先行研究 \cite{Konno2025v7, Konno2025v9} に譲り、本稿ではその上で行う輸送比較解析に焦点を当てる。
+
+数値計算は一辺$L=100$の立方体領域で行い、空間は$N^3 = 64^3$グリッドに離散化した。時間発展には、運動項とポテンシャル項を分離するStrang splitting法を採用し、GPU（CUDA）による並列計算を用いて時系列データを生成した。ここで扱う伝播シミュレーションは有限サイズ$L=100$の系に対するものであるため、以下で観測される挙動は、Part IXで有限サイズスケーリングから推定された熱力学極限の臨界温度$T_c$と必ずしも一対一には対応しない。したがって本研究の比較は、熱力学極限における厳密な相判定というよりも、有限サイズ系における代表的な温度条件下での伝播特性の違いを調べるものとして位置づける。
+
+\subsection{ATPエネルギースケール写像に基づく比較シナリオ}
+Part IXにおいて本モデルに対する熱力学極限の臨界温度推定値として
+\begin{equation}
+T_c \approx 0.0863
+\end{equation}
+が得られている \cite{Konno2025v9}。本研究ではこの結果を足場として、ATPエネルギースケールを用いた有効温度写像を導入する。自然単位系$\hbar = m = k_B = 1$のもとで、無次元温度は
+\begin{equation}
+T = \frac{k_B T_{\mathrm{phys}}}{E_0}
+\end{equation}
+で定義される。ここで$E_0$をATP加水分解の代表的自由エネルギースケール$E_{\mathrm{ATP}} \approx 0.5\,\mathrm{eV}$とみなすと \cite{Phillips2012, Milo2015}、生体温度$T_{\mathrm{phys}} \approx 310\,\mathrm{K}$に対して
+\begin{equation}
+T_{\mathrm{eff}} \approx \frac{0.0267\,\mathrm{eV}}{0.5\,\mathrm{eV}} \approx 0.0534
+\end{equation}
+が得られる。本稿ではこれをATPスケールのエネルギー供給を受ける自由度に対する有効的な低雑音条件として用いる。ここで重要なのは、この$T_{\mathrm{eff}}$が浴温そのものを置き換える量ではなく、ATPスケールを基準とした粗視化的な無次元指標であるという点である。
+
+以上を踏まえ、本研究では以下の2つの代表的シナリオを比較した。
+
+\paragraph{Scenario A: ATPスケール写像に基づく低雑音側条件}
+設定温度を$T = 0.0534$とした。これはATPエネルギースケールから得られる有効温度に対応し、Part IXの臨界温度推定値$T_c$より低温側に位置する代表条件である。
+
+\paragraph{Scenario B: 高雑音参照条件}
+設定温度を$T = 0.10$とした。これは熱力学極限の$T_c$より高温側に位置する比較条件であり、有限サイズ$L=100$においては、Part IXで報告した$T_{\mathrm{sym}}(100)=0.101809$に近く、厳密にはそれをわずかに下回るクロスオーバー近傍の参照条件として用いた。
+
+両シナリオにおいて、時刻$t=0$に伝播軸の左側$z=-25$近傍にガウス型ポテンシャルパルスを印加し、その後の波動関数密度$|\psi(\mathbf{r},t)|^2$の時空間発展を比較した。パルスの幅は$\sigma = 5.0$、振幅は$A = 50.0$とした。評価の主目的は、低雑音側条件と高雑音条件で、局在した入力パルスが背景雑音に対してどの程度識別可能な形で伝播を維持するかを比較する点にある。
+
+\subsection{数値的安定性と解釈可能領域}
+本モデルのような非線形開放系では、高雑音条件においてノイズ項と非線形項の相互作用が強くなり、局所密度の急激な増大や数値積分の不安定化が生じる場合がある。本研究では、物理的に意味のある範囲に解析を限定するため、以下の安全装置を実装した。
+
+\begin{enumerate}
+    \item \textbf{密度上限の監視}: 局所密度があらかじめ設定した閾値を超えた場合、計算を停止する。
+    \item \textbf{NaN検出}: 時系列中に非数（NaN）が検出された場合、当該時点でシミュレーションを停止する。
+    \item \textbf{解釈領域の制限}: 計算停止が生じた条件については、停止前までの検証済み時間窓のみを物理的解釈の対象とし、以後の領域は「数値的に定義不能な領域（numerically ill-defined region）」として扱う。
+\end{enumerate}
+
+したがって高雑音参照条件に対する議論は、数値的不安定化の発生そのものを直接的な物理証拠とみなすものではなく、あくまで停止前時間窓において観測された信号の拡散傾向とコントラスト低下に限定される。具体的な停止閾値、数値安定性判定条件、および関連する実装パラメータの詳細は、公開リポジトリ内の解析スクリプトおよび設定ファイルに明記されている。
+
+\subsection{評価指標：信号コントラスト}
+エネルギー伝播の質を定量化するため、伝播軸の右端$z>25$をターゲット領域と定め、その最終時刻における局所ピークの識別性を測る指標として信号コントラスト$\mathcal{C}$を導入した。具体的には
+\begin{equation}
+\mathcal{C} = \frac{\max_{z\in \mathrm{target}} |\psi(z,t_{\mathrm{end}})|^2}{\left\langle |\psi(z,t_{\mathrm{end}})|^2 \right\rangle_{z\in \mathrm{target}}} - 1
+\label{eq:contrast}
+\end{equation}
+と定義する。ここで分子はターゲット領域における最大エネルギー密度、分母は同領域の平均エネルギー密度である。この定義では、背景に対して局在ピークが明瞭に存在する場合には$\mathcal{C}>0$をとり、領域内がほぼ一様な雑音で占められている場合には$\mathcal{C}\approx 0$となる。
+
+なおScenario Bは数値的不安定化により早期停止するため、本稿で報告した$\mathcal{C}$は両シナリオで共通の時刻における値ではなく、各条件において最後に検証可能であった時刻で評価した値である。したがってこの比較は、厳密な同時刻比較というよりも、各条件下で数値的に到達可能であった最終状態における信号識別性の比較として解釈されるべきである。
+
+\FloatBarrier
+
+% ===============================================================
+%   SECTION: Results
+% ===============================================================
+\section{結果 (Results)}
+\label{sec:results}
+
+\subsection{低雑音側条件と高雑音参照条件における伝播の対照}
+図1は、ATPエネルギースケール写像に基づく低雑音側条件（Scenario A: $T=0.0534$）と、高雑音参照条件（Scenario B: $T=0.10$）におけるエネルギーパルスの時空間発展を比較したものである。
+
+Scenario Aでは、時刻$t=0$に左側から注入した局在パルスが、背景雑音に対して比較的明瞭な構造を保ちながら伝播した。時空間プロット上では、入力に対応する帯状構造が伝播軸に沿って追跡可能であり、高雑音条件に比べて局在性と識別性が維持されていることがわかる。ターゲット領域（$z>25$）における最終時刻の信号コントラストは、式(\ref{eq:contrast})の定義に基づき
+\begin{equation}
+\mathcal{C} \approx 0.03
+\end{equation}
+であった。これは、背景平均に対して局所ピークがなお識別可能であることを示している。
+
+これに対してScenario Bでは、入力パルスはより速やかに拡散し、背景雑音との識別性を失った。時空間プロット上でも、明瞭な局在構造は短時間で崩れ、ターゲット領域での最終的な信号コントラストは
+\begin{equation}
+\mathcal{C} \approx 0.00
+\end{equation}
+となった。すなわち、本モデルの範囲では、高雑音条件では入力信号が背景ノイズと区別しにくくなる傾向が確認された。
+
+なお、Scenario Bでは$t \approx 42$以降に数値安定性の閾値を超えたため、それ以降の領域はグレーでマスクした。したがって高雑音条件に関する物理的解釈は、安定に計算できた停止前時間窓に限定される。本稿で示す対照は、低雑音側条件では局在波束の識別性が比較的維持される一方、高雑音条件ではその識別性が急速に低下する、という有限サイズ系$L=100$における伝播特性の違いを表している。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{figures/V10_Figure1_Propagation_v6.pdf}
+    \caption{
+        \textbf{低雑音側条件と高雑音参照条件における伝播ダイナミクスの比較。}
+        左図は、ATPエネルギースケールに基づく有効温度写像から得られる低雑音側条件（$T=0.0534$）における結果であり、注入された局在波束が背景雑音に対して比較的明瞭な構造を保ちながら伝播している（$\mathcal{C}\approx 0.03$）。
+        右図は高雑音参照条件（$T=0.10$）であり、入力信号はより速やかに拡散し、背景との識別性を失う（$\mathcal{C}\approx 0.00$）。
+        なお本比較は有限サイズ$L=100$の系における伝播特性を示すものであり、熱力学極限での厳密な相判定そのものを与えるものではない。右図のグレー領域は、数値的安定性の閾値を超えたため解釈対象外とした pre-crash window 以降の領域である。
+        \newline\newline
+        \textbf{Reproducibility:} This figure was generated by the analysis script \texttt{V10\_Generate\_Figures\_1\_and\_2\_v6.py}, available in the repository.
+    }
+    \label{fig:propagation}
+\end{figure}
+
+\subsection{ATPエネルギースケールの臨界スケールへの写像}
+図2は、Part IXで得られた臨界温度推定値$T_c \approx 0.0863$を基準として、ATPエネルギースケールに基づく有効温度$T_{\mathrm{eff}}$を本モデルの制御パラメータ空間へ写像した概念図である。ここで用いた$T_{\mathrm{eff}} \approx 0.0534$は、ATP加水分解の代表的自由エネルギー差$E_{\mathrm{ATP}}\approx 0.5\,\mathrm{eV}$に対して、体温310Kに対応する熱エネルギーを規格化した値である。
+
+この$T_{\mathrm{eff}}$は、熱力学極限に対する臨界温度推定値$T_c$より低温側に位置している。一方、高雑音参照条件$T=0.10$は$T_c$より高温側にある。したがって、ATPスケールのエネルギー供給を受ける自由度は、本モデルの無次元制御パラメータ空間において、秩序側に対応するレジームへ写像されうることが示唆される。
+
+もっとも、本稿の伝播シミュレーションは有限サイズ$L=100$に対して実施されており、そのクロスオーバーはPart IXで外挿された熱力学極限の$T_c$と厳密に一致するとは限らない。したがって図2の役割は、ATPスケール写像が本モデルの推定臨界スケールに対してどこに位置するかを可視化する点にあり、新たな秩序パラメータの定量フィットを与えるものではない。
+
+以上の結果は、ATPエネルギースケールに基づく有効温度写像が、本モデルの範囲では低雑音側条件に対応しうること、そしてその条件下では高雑音参照条件に比べて、より識別可能な伝播構造が維持されうることを示している。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/V10_Figure2_Scaling_Logic_v6.pdf}
+    \caption{
+        \textbf{生体エネルギースケールのモデル制御パラメータへの写像。}
+        実線は、Part IXで得られた臨界温度推定値$T_c \approx 0.0863$を基準として描いた秩序パラメータ$m(T)$の概念図（schematic）であり、本稿における新たなデータフィットではない。
+        緑の点はATPエネルギースケール$E_{\mathrm{ATP}}\approx 0.5\,\mathrm{eV}$を用いた有効温度$T_{\mathrm{eff}}\approx 0.0534$を示し、赤の×印は高雑音参照条件$T=0.10$を示す。
+        図の目的は、ATPスケールに基づく有効温度写像が本モデルの低温側レジームに対応しうることを、Part IXの臨界スケールとの関係で視覚化する点にある。
+        \newline\newline
+        \textbf{Reproducibility:} This figure was generated by the plotting script \texttt{V10\_Generate\_Figures\_1\_and\_2\_v6.py}, available in the repository.
+    }
+    \label{fig:scaling}
+\end{figure}
+
+\FloatBarrier
+
+% ===============================================================
+%   SECTION: Discussion
+% ===============================================================
+\section{考察 (Discussion)}
+\label{sec:discussion}
+
+\subsection{ATPスケール写像と秩序側伝播の解釈}
+本研究では、ATPの加水分解自由エネルギーを代表的エネルギースケールとして採用する有効温度写像に基づき、$T_{\mathrm{eff}} \approx 0.0534$という低雑音側条件を導入した。この値はPart IXで推定された臨界温度$T_c \approx 0.0863$より低温側に位置する。したがって本モデルの制御パラメータ空間においては、ATPスケールのエネルギー供給を受ける自由度が、秩序側に対応するレジームへ入りうることが示唆される。
+
+伝播シミュレーションでは、この低雑音側条件のもとで、局所的に注入したエネルギーパルスが背景雑音に対して比較的識別可能な構造を保ちながら伝播した。一方、高雑音参照条件では、入力パルスはより速やかに拡散し、ターゲット領域での信号コントラストはほぼゼロに近づいた。この対照は、本モデルの範囲では、秩序側に対応する条件が高雑音条件よりも伝播に有利な環境を与える可能性を示している。
+
+もっとも、ここでいう「ATPによる秩序化」は、ATP加水分解反応を微視的に実装した結果ではない。本研究の結論は、ATPが供給しうるエネルギースケールを無次元制御パラメータに写像したとき、系が低雑音側に位置づけられうるという粗視化的な意味で理解されるべきである。その意味で本稿は、ATP駆動の直接的証明ではなく、ATPスケールのエネルギー供給が秩序だった輸送様ダイナミクスを支えうるという、有効モデル上の物理的シナリオを提示している。
+
+\subsection{Part IXの臨界スケールとの関係と有限サイズ解釈}
+本研究の議論は、Part IXで得られた臨界温度推定値$T_c$に依拠しているが、その扱いには注意が必要である。Part IXの$T_c$は、複数サイズの有限サイズスケーリングから外挿された熱力学極限の作業仮説的な臨界スケールである \cite{Konno2025v9}。一方、本稿の伝播シミュレーションは有限サイズ$L=100$に固定して行われている。したがって、ここで観測される温度依存性は、厳密には熱力学極限の相境界そのものではなく、有限系におけるクロスオーバーの影響を含む。
+
+特に高雑音参照条件として用いた$T=0.10$は、熱力学極限では$T_c$を上回る一方、Part IXで報告した$T_{\mathrm{sym}}(100)$に比較的近い領域にある。このため本稿の比較は、「秩序相」と「無秩序相」を有限サイズ系で厳密に判定したものというよりも、低雑音側条件と高雑音側条件で伝播ダイナミクスがどのように変化するかを示したものと解釈するのが適切である。この点を明示することは、Part IXの堅実な臨界解析とPart Xの応用的展開とを無理なく接続するうえで重要である。
+
+\subsection{生物物理学的含意の位置づけ}
+本研究の結果は、強い熱雑音環境に置かれた生体が、どのようにして秩序だった輸送様ダイナミクスを維持しうるかという問いに対して、一つの物理学的解釈を与える。すなわち、細胞全体が熱力学的に低温にあるわけではなくとも、ATPのような高エネルギー分子が特定の自由度に対して十分大きなエネルギースケールを提供するならば、その自由度は有効的には低雑音側に位置づけられ、輸送に必要な構造を維持しやすくなる可能性がある。
+
+この見方は、非平衡的エネルギー注入が特定モードへの秩序化を助けうるという Fröhlich 的な着想 \cite{Frohlich1968} と定性的に響き合う。しかし本研究は、Fröhlich凝縮そのものを直接に実証するものではないし、ATP加水分解の化学反応ネットワークを記述するものでもない。したがって、生物物理学的含意は「本モデルの制御パラメータ空間において、ATPスケールのエネルギー供給が秩序側条件に対応しうる」というレベルで慎重に述べるのが適切である。
+
+同様に、「低損失輸送」や「ソリトン」といった用語の使用にも節度が必要である。本稿で実際に示しているのは、代表的条件下で局在波束の識別性が比較的維持されること、および高雑音条件ではその識別性が速やかに失われることである。したがって現段階では、「低損失チャネルの確立を証明した」と言うより、「秩序側条件が高雑音条件よりも伝播に有利な可能性を示した」と表現する方が、結果の射程に忠実である。
+
+\subsection{高雑音条件における数値的不安定化の意味}
+高雑音参照条件では、入力パルスの識別性が急速に低下した後、数値的不安定化が生じた。この事実は、高雑音条件下において非線形開放系の積分が難しくなることを示しているが、その数値的停止自体を現実の生体現象における「熱死」や不可逆的崩壊の直接的な証拠と見なすことはできない。より妥当な解釈は、少なくとも停止前時間窓において、背景雑音の増大が局在構造の保持を困難にし、信号コントラストの低下と拡散傾向をもたらした、というものである。
+
+この慎重な解釈は、本研究の信頼性にとって重要である。数値シミュレーションにおけるクラッシュは、時間刻み、格子解像度、非線形性、ノイズ強度など複数の要因に依存しうるため、それ自体を強い物理主張へ直結させるべきではない。本稿では、安定に計算できた範囲のデータのみを議論の根拠とし、それ以後の領域は明示的に「数値的に定義不能」として扱った。この方針は、Part IXにおける自己修正的・再現性重視の姿勢とも整合している。
+
+\subsection{本研究の限界と解釈の範囲 (Limitations and Scope of Interpretation)}
+本研究には、結果の解釈に際して明示すべきいくつかの限界がある。第一に、本稿で導入したATP関連のスケーリングは、ATP加水分解の微視的反応機構そのものをモデル化したものではなく、ATPが供給しうる自由エネルギー差を、本モデルの無次元制御パラメータへ写像するための粗視化的な有効記述である。したがって、本研究の結論は「ATPの化学反応を直接シミュレーションした結果」ではなく、「ATPエネルギースケールに対応する条件が、本モデル内でどのようなレジームに位置づけられるか」を示したものとして理解されるべきである。
+
+第二に、本稿の伝播解析は有限サイズ$L=100$の系で実施されている。そのため、ここで観測されるクロスオーバーや伝播特性は、Part IXで有限サイズスケーリングから得られた熱力学極限の臨界温度$T_c$と厳密に一致するとは限らない。特に$T=0.10$の高雑音条件は、熱力学極限では$T_c$を上回る一方で、有限サイズ$L=100$における$T_{\mathrm{sym}}(100)$近傍に位置する。したがって本稿の比較は、厳密な相分類の実証というよりも、有限系における低雑音側と高雑音側の伝播特性の対照として解釈するのが適切である。
+
+第三に、高雑音条件では数値的不安定化が生じ、計算は停止前時間窓の範囲でのみ信頼できる。この不安定化は、高温・高雑音条件における非線形開放系の難しさを反映しているが、その発生自体を現実の生体過程における「熱死」や不可逆的崩壊の直接的証拠とみなすことはできない。本稿では、停止以前の検証済み時間窓に限定して、信号コントラストの低下と急速な拡散傾向を議論する。
+
+第四に、本稿で示した伝播結果は、秩序だった輸送の可能性を示す代表例としての性格を持つ。今後は、複数の乱数シードに対する統計平均、時間刻みや格子解像度に対する安定性検証、ならびにATPを模した明示的な非平衡駆動項の導入によって、本稿の有効記述がどこまで頑健に成立するかをさらに検証する必要がある。
+
+なお、本稿の有効温度写像は、採用するATP自由エネルギースケールに感度を持つ。たとえば標準条件に近い $E_{\mathrm{ATP}} \approx 0.3\,\mathrm{eV}$ を用いると、$T_{\mathrm{eff}} \approx 0.0267/0.3 \approx 0.089$ となり、Part IXの推定臨界スケール $T_c \approx 0.0863$ に極めて近い、あるいはわずかに上回る領域に移動する。したがって本稿の秩序側解釈は、in vivo 条件における比較的大きな自由エネルギー差（$\sim 0.5\,\mathrm{eV}$）の採用に依存しており、この点は本有効写像の重要な感度要因である。
+
+以上の意味で、本研究の貢献は、ATPスケールのエネルギー供給が熱雑音下の輸送にどのような物理的役割を果たしうるかについて、3次元ハイブリッドモデルの枠内で検討可能な一つの整合的シナリオを提示した点にある。
+
+% ===============================================================
+%   SECTION: Conclusion
+% ===============================================================
+\section{結論 (Conclusion)}
+\label{sec:conclusion}
+本研究（Part X）では、Part IXで推定された臨界温度スケールを基盤として、ATPエネルギースケールに基づく有効温度写像が、3次元ハイブリッドモデルにおけるエネルギー伝播にどのような影響を与えるかを検討した。ATPの自由エネルギー差を代表的な駆動エネルギースケールとみなす有効記述のもとで、$T_{\mathrm{eff}} \approx 0.0534$ は臨界温度推定値 $T_c \approx 0.0863$ より低温側に位置し、ATPスケールのエネルギー供給を受ける自由度が秩序側レジームに対応しうることが示唆された。
+
+さらに、低雑音条件と高雑音条件の比較シミュレーションにより、前者では局在した波束が背景雑音に対して比較的高い識別性を保ちながら伝播し、後者では信号のコントラストが速やかに低下することを確認した。この差は、本モデルの範囲では、秩序側レジームが高雑音条件よりも輸送に有利な環境を与える可能性を示している。
+
+もっとも、本研究はATP加水分解の微視的過程を直接記述したものではなく、エネルギースケールの写像に基づく有効モデル研究である。また、伝播解析は有限サイズ系で実施されており、高雑音条件における解釈も数値的に検証された時間窓に限定される。したがって本稿の結論は、「ATPが直接的に生体内秩序輸送を証明した」というものではなく、ATPスケールのエネルギー供給が、熱雑音下でも秩序だった輸送様ダイナミクスを支えうるという、物理学的に一貫した仮説的枠組みを本モデル内で提示した点にある。
+
+今後は、明示的な非平衡駆動項の導入、多数シードによる統計化、多細胞・多チャネル系への拡張を通じて、この有効記述の妥当性と適用範囲をさらに精査していく必要がある。
+
+\FloatBarrier
+
+% ===============================================================
+%   SECTION: Declarations
+% ===============================================================
+\section*{謝辞およびAI利用開示 (Acknowledgements and AI Disclosure)}
+本研究の数式モデル設計、Pythonコード生成、シミュレーション設計、および本稿の執筆と推敲の全段階において、複数の大規模言語モデル（LLM）をコード生成・解析補助・草稿の推敲などの目的で対話的に利用した。
+特に、ATPエネルギースケーリングの着想から、数値的不安定性の物理的解釈の精緻化に至るまで、AIとの協調的な議論が研究の深化に大きな助力となった。
+本研究の完遂は人間とAIの持続的なパートナーシップが可能にしたものである。
+
+\section*{Data and Code Availability Statement}
+The official record for this research is publicly available on Zenodo under the following DOI: \href{https://doi.org/10.5281/zenodo.18975719}{\textbf{10.5281/zenodo.18975719}}.
+All figures presented in this manuscript can be fully reproduced using the provided scripts.
+All code, data, and analysis scripts used in this research are publicly available in the following GitHub repository: \url{https://github.com/k-toppi/CoupledField3D}.
+This repository includes all source code, generated data, analysis notebooks, and build instructions to ensure full reproducibility by third parties.
+The license for the manuscript is Creative Commons Attribution 4.0 International (CC BY 4.0), and the code is provided under the MIT License.
+
+\section*{競合利益 (Competing Interests)}
+The author declares no competing interests.
+
+\FloatBarrier
+
+% ===============================================================
+%   References Section
+% ===============================================================
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+% ===============================================================
+%   DOCUMENT END
+% ===============================================================
+\end{document}
